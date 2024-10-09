@@ -1,6 +1,6 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { TableService } from '../services/table/table.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { find } from 'rxjs';
@@ -30,11 +30,11 @@ export class TableComponent implements OnInit {
   dataSource: any = [];
   prixProduits: any[] = [];
   customerColumns: string[] = [];
-  customerForms: FormGroup[] = [];
+  customerForms: UntypedFormGroup[] = [];
   
-  columnFormGroup: FormGroup;
+  columnFormGroup: UntypedFormGroup;
   
-  nameControls: { [key: number]: FormControl } = {};
+  nameControls: { [key: number]: UntypedFormControl } = {};
 
   deleteActivated: Boolean = false;
   
@@ -53,7 +53,7 @@ export class TableComponent implements OnInit {
   groupedData: any = {};
   categoryVisibility: any = {};
 
-  clientFilterControl = new FormControl();
+  clientFilterControl = new UntypedFormControl();
   filteredClients: any[] = [];
 
   dialogConfig = new MatDialogConfig()
@@ -67,7 +67,7 @@ export class TableComponent implements OnInit {
   constructor(
     private http: HttpClient,
     public dialog: MatDialog,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     public tableService: TableService,
     ) {
       this.columnFormGroup = this.fb.group({

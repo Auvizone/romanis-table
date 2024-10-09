@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { TableService } from '../services/table/table.service';
 
@@ -13,13 +13,13 @@ export class ModaleEditComponent implements OnInit {
   data: any;
   colonneName : string = '';
 
-  nameFormGroup: FormGroup;
+  nameFormGroup: UntypedFormGroup;
 
   constructor(
     public dialog: MatDialog,
     public tableService: TableService,
     @Inject(MAT_DIALOG_DATA) data: any,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
   ) { 
     this.data = data;
     this.nameFormGroup = this.fb.group({

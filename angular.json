@@ -72,10 +72,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "romanis-table:build:production"
+              "buildTarget": "romanis-table:build:production"
             },
             "development": {
-              "browserTarget": "romanis-table:build:development"
+              "buildTarget": "romanis-table:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -83,7 +83,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "romanis-table:build"
+            "buildTarget": "romanis-table:build"
           }
         },
         "test": {

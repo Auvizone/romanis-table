@@ -1,0 +1,58 @@
+table {
+  width: 100%;
+}
+
+th {
+  cursor: pointer;
+}
+
+.flex {
+  display: flex;
+  flex-direction: row;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.mat-cell, .mat-footer-cell {
+  border: 1px solid lightgray;
+  text-align: center;
+}
+
+th.mat-header-cell {
+  text-align: center;
+}
+
+.button {
+  height: 40px;
+  margin-left: 50px;
+  margin-top: 10px;
+}
+
+.table-container {
+  position: relative;
+}
+
+.delete-button {
+  width: 20px;
+  background-color: #b80101;
+  color: white;
+  border-radius: 5px;
+  border: none;
+  padding: 5px;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+}
+
+.title-table {
+  background-color: lightgray;
+}
+
+.hidden-row {
+  display: none;
+}
+
+.shown-row {
+  display: table-row;
+}/*# sourceMappingURL=table.component.css.map */
+

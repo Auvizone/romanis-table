@@ -1,0 +1,15 @@
+<p class="title">{{colonneName}}</p>
+
+<div class="form">
+    <form [formGroup]="nameFormGroup">
+        <mat-form-field appearance="outline" color="primary">
+            <mat-label>Nouveau Nom</mat-label>
+            <input matInput formControlName="nom">
+        </mat-form-field>
+    </form>
+</div>
+
+<div class="btn-box">
+    <button mat-raised-button (click)="updateName()" color="primary" class="button">Modifier</button>
+    <button mat-raised-button (click)="deleteColumn()" color="danger" class="button delete">Supprimer</button>
+</div>

@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>Reorder Columns</h2>
+    <mat-dialog-content>
+      <div cdkDropList (cdkDropListDropped)="drop($event)">
+        <div *ngFor="let item of items" cdkDrag class="drag-item">
+        {{ item.position }}. {{ item.name }}
+          <mat-icon class="cursor" cdkDragHandle>Déplacer</mat-icon>
+        </div>
+      </div>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+      <button mat-button (click)="onCancel()">Annuler</button>
+      <button mat-button color="primary" (click)="onSave()">Enregistrer</button>
+    </mat-dialog-actions>

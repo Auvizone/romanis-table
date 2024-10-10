@@ -1,4 +1,4 @@
-import { Component, Injectable, OnInit } from '@angular/core';
+import { Component, ElementRef, Injectable, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { TableService } from '../services/table/table.service';
@@ -8,6 +8,10 @@ import { Pricings } from '../Models/pricing.interface';
 import { Produits } from '../Models/produits.interface';
 import { ModaleEditComponent } from '../modale-edit/modale-edit.component';
 import { ReorderComponent } from '../reorder/reorder.component';
+import { ReactiveFormsModule} from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import * as XLSX from 'xlsx';
+
 
 export interface TableRow {
   id: number;
@@ -23,7 +27,7 @@ export interface GroupBy {
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss']
+  styleUrls: ['./table.component.scss'],
 })
 export class TableComponent implements OnInit {
 
@@ -31,6 +35,19 @@ export class TableComponent implements OnInit {
   prixProduits: any[] = [];
   customerColumns: string[] = [];
   customerForms: UntypedFormGroup[] = [];
+  @ViewChild('TABLE') table: ElementRef | any;
+  
+  ExportTOExcel()
+  {
+    console.log('table:', this.table.nativeElement)
+    const ws: XLSX.WorkSheet=XLSX.utils.table_to_sheet(this.table.nativeElement);
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+    
+    /* save to file */
+    XLSX.writeFile(wb, 'Matrice_tarifaire.xlsx');
+    
+  }
   
   columnFormGroup: UntypedFormGroup;
   

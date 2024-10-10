@@ -18,16 +18,17 @@
     <input type="text" placeholder="Nom" aria-label="Nom" matInput>
   </mat-form-field> -->
   
-  <button mat-raised-button (click)="addColumn()" color="primary" class="button">Ajout colonne</button>
+  <button mat-flat-button (click)="addColumn()" color="primary" class="button">Ajout colonne</button>
   
-  <button mat-raised-button color="primary" (click)="openReorderDialog()" class="button">Ordre colonnes</button>
+  <button mat-flat-button color="primary" (click)="openReorderDialog()" class="button">Ordre colonnes</button>
+  <button mat-flat-button color="primary" (click)="ExportTOExcel()" class="button">Export</button>
   <!--<button mat-raised-button (click)="showDelete()" color="alert" class="button">Suppression colonne</button>-->
 </div>
 
 
 
-
-  <table mat-table [dataSource]="transformedData" class="mat-elevation-z8">
+<div #TABLE>
+  <table mat-table [dataSource]="transformedData" class="mat-elevation-z8" >
     <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
       <th mat-header-cell *matHeaderCellDef (click)="openModaleEdit(column)">
         {{column}}
@@ -47,6 +48,7 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+</div>
 </div>
 
  <!-- <table mat-table [dataSource]="transformedData" class="mat-table">

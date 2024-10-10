@@ -46,6 +46,7 @@ export class ReorderComponent {
   }
 
   drop(event: CdkDragDrop<string[]>) {
+    console.log('test drop')
     moveItemInArray(this.items, event.previousIndex, event.currentIndex);
     // Update positions after reordering
     this.items.forEach((item, index) => item.position = index + 1);

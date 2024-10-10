@@ -10,14 +10,22 @@
     left: 20px;
   }
 
-  .mat-cell, .mat-footer-cell {
+  .mat-mdc-cell, .mat-mdc-footer-cell {
     border: 1px solid lightgray;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    background: white;
+    }
+
+  th.mat-mdc-header-cell {
     text-align: center;
     }
 
-  th.mat-header-cell {
-    text-align: center;
-    }
+  .mat-mdc-table {
+    font-family: Roboto,Helvetica Neue,sans-serif;
+  }
 
   .button {
     height: 40px;
@@ -59,7 +67,7 @@
     overflow: auto;
   }
   
-  .mat-cell, .mat-header-cell {
+  .mat-mdc-cell, .mat-mdc-header-cell {
     width: 100px;
     min-width: 100px;
     max-width: 100px;
@@ -67,22 +75,30 @@
     border: 1px solid lightgray;
   }
 
-  .mat-header-cell {
+  .mat-mdc-header-cell {
     cursor: pointer;
+    color: #0000008a;
+    font-size: 12px;
+    font-weight: 500;
+    width: 100px;
+    min-width: 100px;
+    max-width: 100px;
+    padding: 0;
+    margin: 0;
   }
   
-  .mat-header-row, .mat-row {
+  .mat-mdc-header-row, .mat-mdc-row {
     display: table-row;
   }
 
-  .mat-row > td:first-child {
+  .mat-mdc-row > td:first-child {
     position: sticky;
     left: 0;
     z-index: 1000;
     background-color: white;
   }
 
-  .mat-header-row {
+  .mat-mdc-header-row {
     position: sticky;
     top: 0;
     z-index: 1000;

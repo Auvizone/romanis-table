@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://or.arpaone.fr/api'
+  apiUrl: 'http://localhost:8069',
+  odooDb: 'your_odoo_db_name',
 };
 
 /*

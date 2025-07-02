@@ -1,71 +1,50 @@
 <div *ngIf="loading" class="loading-screen">
-  <!-- You can use a spinner component, or simple loading text -->
   <p>Chargement des données, veuillez patienter...</p>
-  <!-- Or use a spinner -->
-  <!-- <app-spinner></app-spinner> -->
 </div>
 
 <div *ngIf="!loading" class="table-container">
-<div class="flex">
-  <form [formGroup]="columnFormGroup">
-    <mat-form-field appearance="outline" color="primary">
-      <mat-label>Nom</mat-label>
-      <input matInput formControlName="nom">
-    </mat-form-field>
-  </form>
+  <div class="flex">
+    <form [formGroup]="columnFormGroup">
+      <mat-form-field appearance="outline" color="primary">
+        <mat-label>Nom</mat-label>
+        <input matInput formControlName="nom" placeholder="Entrez un nom">
+      </mat-form-field>
+    </form>
+    
+    <button mat-flat-button (click)="addColumn()" color="primary" class="button">
+      <span>Ajout colonne</span>
+    </button>
+    
+    <button mat-flat-button color="primary" (click)="openReorderDialog()" class="button">
+      <span>Ordre colonnes</span>
+    </button>
+    
+    <button mat-flat-button color="primary" (click)="ExportTOExcel()" class="button">
+      <span>Export</span>
+    </button>
+  </div>
 
-  <!-- <mat-form-field class="full-width">
-    <input type="text" placeholder="Nom" aria-label="Nom" matInput>
-  </mat-form-field> -->
-  
-  <button mat-flat-button (click)="addColumn()" color="primary" class="button">Ajout colonne</button>
-  
-  <button mat-flat-button color="primary" (click)="openReorderDialog()" class="button">Ordre colonnes</button>
-  <button mat-flat-button color="primary" (click)="ExportTOExcel()" class="button">Export</button>
-  <!--<button mat-raised-button (click)="showDelete()" color="alert" class="button">Suppression colonne</button>-->
+  <div #TABLE>
+    <table mat-table [dataSource]="transformedData" class="mat-elevation-z8">
+      <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
+        <th mat-header-cell *matHeaderCellDef (click)="openModaleEdit(column)">
+          {{column}}
+        </th>
+        <td mat-cell *matCellDef="let element" [attr.data-is-group]="element.isGroup">
+          <ng-container *ngIf="!isPricingColumn(column); else pricingCell">
+            {{element[column]}}
+          </ng-container>
+          <ng-template #pricingCell>
+            <input [(ngModel)]="element[column]"
+              (blur)="updatePricings(element, column)"
+              [disabled]="element.isGroup"
+              [ngClass]="{'disabled': element.isGroup}"
+              class="input-table">
+          </ng-template>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" [attr.data-is-group]="row.isGroup"></tr>
+    </table>
+  </div>
 </div>
-
-
-
-<div #TABLE>
-  <table mat-table [dataSource]="transformedData" class="mat-elevation-z8" >
-    <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
-      <th mat-header-cell *matHeaderCellDef (click)="openModaleEdit(column)">
-        {{column}}
-      </th>
-      <td mat-cell *matCellDef="let element">
-        <ng-container *ngIf="!isPricingColumn(column); else pricingCell">
-          {{element[column]}}
-        </ng-container>
-        <ng-template #pricingCell>
-          <input [(ngModel)]="element[column]"
-            (blur)="updatePricings(element, column)"
-            [disabled]="element.isGroup"
-            class="input-table">
-        </ng-template>
-      </td>
-    </ng-container>
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-</div>
-</div>
-
- <!-- <table mat-table [dataSource]="transformedData" class="mat-table">
-    <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
-      <th mat-header-cell *matHeaderCellDef class="sticky-header" (click)="openModaleEdit(column)">
-        {{ column | uppercase }}
-      </th>
-      <td mat-cell *matCellDef="let element" class="sticky-column" (click)="toggleRowVisibility(element)">
-        <ng-container *ngIf="isPricingColumn(column) && !element.isGroup">
-          <input matInput [(ngModel)]="element[column]" (blur)="updatePricings(element, column)">
-        </ng-container>
-        <ng-container *ngIf="!isPricingColumn(column) || element.isGroup">
-          {{ element[column]}}
-        </ng-container>
-      </td>
-    </ng-container>
-    <tr mat-header-row *matHeaderRowDef="displayedColumns" class="sticky-header"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'title-table': row.isGroup}"></tr>
-  </table> -->
-

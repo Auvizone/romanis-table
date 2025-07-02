@@ -1,9 +1,8 @@
-<h2 mat-dialog-title>Reorder Columns</h2>
+<h2 mat-dialog-title>Ordre des colonnes</h2>
     <mat-dialog-content>
-      <!-- <div cdkDropList (cdkDropListDropped)="drop($event)"> -->
-        <div cdkDropList>
+      <div cdkDropList (cdkDropListDropped)="drop($event)">
         <div *ngFor="let item of items" cdkDrag class="drag-item">
-        {{ item.position }}. {{ item.name }}
+          {{ item.position }}. {{ item.name }}
           <mat-icon class="cursor" cdkDragHandle fontIcon="menu"></mat-icon>
         </div>
       </div>

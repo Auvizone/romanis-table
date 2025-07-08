@@ -18,13 +18,16 @@ export class LoginComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
   onSubmit(): void {
-    this.authService.login(this.loginData).subscribe({
+    this.authService.login(
+      this.loginData.login,
+      this.loginData.password
+    ).subscribe({
       next: () => {
         this.router.navigate(['/']); // Navigate to a protected route on success
       },
       error: (err) => {
         console.error('Login failed in component:', err);
-        this.error = err.message;
+        this.error = err.message; 
       }
     });
   }

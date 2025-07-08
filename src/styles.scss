@@ -2,3 +2,26 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* Custom Dialog Styling */
+.custom-dialog-container .mat-mdc-dialog-surface {
+  padding: 0 !important;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.custom-dialog-container .mat-mdc-dialog-container .mdc-dialog__surface {
+  padding: 0;
+}
+
+.custom-dialog-container .mat-mdc-dialog-content {
+  padding: 0 !important;
+  margin: 0 !important;
+  max-height: none !important;
+}
+
+.custom-dialog-container .mat-mdc-dialog-actions {
+  padding: 0 !important;
+  margin: 0 !important;
+}

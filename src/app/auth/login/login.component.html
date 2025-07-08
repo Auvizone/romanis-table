@@ -1,17 +1,49 @@
-<div class="login-container">
-  <h2>Login</h2>
-  <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
-    <div class="form-group">
-      <label for="username">Username</label>
-      <input type="text" id="username" required [(ngModel)]="loginData.login" name="username" #username="ngModel">
+<div class="login-page">
+  <div class="login-container">
+    <div class="login-header">
+      <h2>Matrice Tarifaire</h2>
     </div>
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input type="password" id="password" required [(ngModel)]="loginData.password" name="password" #password="ngModel">
-    </div>
-    <button type="submit" [disabled]="!loginForm.form.valid">Login</button>
-    <div *ngIf="error" class="error-message">
-      {{ error }}
-    </div>
-  </form>
+    
+    <form (ngSubmit)="onSubmit()" #loginForm="ngForm" class="login-form">
+      <div class="form-group">
+        <div class="input-icon-wrapper">
+          <span class="material-icons">person</span>
+          <input 
+            type="text" 
+            id="username" 
+            required 
+            [(ngModel)]="loginData.login" 
+            name="username" 
+            #username="ngModel"
+            placeholder="Nom d'utilisateur"
+            autocomplete="username">
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <div class="input-icon-wrapper">
+          <span class="material-icons">lock</span>
+          <input 
+            type="password" 
+            id="password" 
+            required 
+            [(ngModel)]="loginData.password" 
+            name="password" 
+            #password="ngModel"
+            placeholder="Mot de passe"
+            autocomplete="current-password">
+        </div>
+      </div>
+      
+      <button type="submit" [disabled]="!loginForm.form.valid" class="login-button">
+        <span class="material-icons">login</span>
+        Connexion
+      </button>
+      
+      <div *ngIf="error" class="error-message">
+        <span class="material-icons">error</span>
+        {{ error }}
+      </div>
+    </form>
+  </div>
 </div>

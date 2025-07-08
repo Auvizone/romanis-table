@@ -1,0 +1,35 @@
+<div class="column-dialog">
+  <div class="dialog-header">
+    <h2>Ajouter une colonne</h2>
+  </div>
+
+  <div class="dialog-content">
+    <form [formGroup]="columnFormGroup" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <div class="input-icon-wrapper">
+          <span class="material-icons">create</span>
+          <input 
+            type="text" 
+            formControlName="nom" 
+            placeholder="Nom de la colonne"
+            autocomplete="off">
+        </div>
+        <div class="error-message" *ngIf="columnFormGroup.get('nom')?.invalid && columnFormGroup.get('nom')?.touched && submitAttempted">
+          <span class="material-icons">error_outline</span>
+          Le nom de la colonne est requis
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="dialog-actions">
+    <button type="button" class="cancel-button" (click)="onCancel()">
+      <span class="material-icons">close</span>
+      Annuler
+    </button>
+    <button type="submit" class="submit-button" (click)="$event.preventDefault(); onSubmit()" [disabled]="columnFormGroup.invalid">
+      <span class="material-icons">add</span>
+      Ajouter
+    </button>
+  </div>
+</div>

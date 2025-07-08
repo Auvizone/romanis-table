@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatRadioModule } from '@angular/material/radio';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -14,6 +15,7 @@ import { MatIconModule } from '@angular/material/icon'
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReorderComponent } from './reorder/reorder.component';
 import { ModaleEditComponent } from './modale-edit/modale-edit.component';
+import { AddColumnComponent } from './add-column/add-column.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatButtonModule } from '@angular/material/button';
 import { DragDropModule } from '@angular/cdk/drag-drop';
@@ -26,7 +28,8 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     AppComponent,
     TableComponent,
     ReorderComponent,
-    ModaleEditComponent
+    ModaleEditComponent,
+    AddColumnComponent
   ],
   imports: [
     BrowserModule,
@@ -42,6 +45,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     MatButtonModule,
     DragDropModule,
     ScrollingModule,
+    MatRadioModule,
   ],
   providers: [provideHttpClient(withInterceptors([credentialInterceptor])), provideAnimationsAsync()],
   bootstrap: [AppComponent]

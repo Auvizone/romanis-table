@@ -12,6 +12,7 @@ import { ReactiveFormsModule} from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import * as XLSX from 'xlsx';
 import { ActivatedRoute } from '@angular/router';
+import { AddColumnComponent } from '../add-column/add-column.component';
 
 export interface TableRow {
   id: number;
@@ -148,52 +149,33 @@ export class TableComponent implements OnInit {
     return item.product || item.name || index;
   }
 
-  // FONCTION AJOUT COLONNE AVEC TEXTE VENANT DU FORM
-//   addColumn() {
-//     const colonneNom = this.columnFormGroup.value.nom; 
-//     const nomParam: any = {
-//       params: {
-//         nom: colonneNom
-//       }
-//     };
-//     this.tableService.createPricings(nomParam).subscribe((data) => {
-//     })
-// }
+  openAddColumnDialog(): void {
+    const dialogRef = this.dialog.open(AddColumnComponent, {
+      width: '400px',
+      panelClass: 'custom-dialog-container',
+      hasBackdrop: true,
+      disableClose: false
+    });
 
-addColumn() {
-  if (this.selectedClientId) {
-    const selectedClient = this.clients.find(client => client.id === this.selectedClientId);
-    if (selectedClient) {
-      const nomParam: any = {
-        params: {
-          nom: selectedClient.name,
-          customer_id: this.selectedClientId
-        }
-      };
-      this.tableService.createPricingsTwo(nomParam, this.lienMatrice).subscribe(() => {
-        this.getPricings();
-        // this.getClients();
-      });
-    }
-  }
-  else {
-    let data = this.columnFormGroup.value;
-    const nomParam: any = {
-      params: {
-        nom : data.nom
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // Add column based on name
+        this.tableService.createPricings(result).subscribe(() => {
+          this.getPricings();
+        });
       }
-    }
-    this.tableService.createPricings(nomParam).subscribe(() => {
-      this.getPricings();
-      this.columnFormGroup.reset();
-    })
+    });
   }
-}
-
-hiddenGroups: Set<string> = new Set();
-
-toggleRowVisibility(groupName: string): void {
-}
+  
+  addColumn() {
+    // Open the dialog instead
+    this.openAddColumnDialog();
+  }
+  
+  hiddenGroups: Set<string> = new Set();
+  
+  toggleRowVisibility(groupName: string): void {
+  }
 
   // FONCTIONS LANCEES AU CHARGEMENT DE LA PAGE
   ngOnInit(): void {
@@ -450,5 +432,22 @@ logColumnName(name: any) {
   get visibleColumns(): string[] {
     // Implementation depends on your viewport size and scroll position
     return this.displayedColumns;
+  }
+  
+  /**
+   * Convert technical column names to user-friendly display names
+   * @param columnName The technical name of the column from the database
+   * @returns User-friendly display name for the column header
+   */
+  getColumnDisplayName(columnName: string): string {
+    // Map of technical names to friendly display names
+    const columnNameMap: { [key: string]: string } = {
+      'name': 'Nom',
+      'designation_2': 'Désignation 2'
+      // Add more mappings as needed
+    };
+    
+    // Return the friendly name if it exists, otherwise return the original name
+    return columnNameMap[columnName] || columnName;
   }
 }

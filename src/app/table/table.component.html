@@ -3,23 +3,19 @@
 </div>
 
 <div *ngIf="!loading" class="table-container">
-  <div class="flex">
-    <form [formGroup]="columnFormGroup">
-      <mat-form-field appearance="outline" color="primary">
-        <mat-label>Nom</mat-label>
-        <input matInput formControlName="nom" placeholder="Entrez un nom">
-      </mat-form-field>
-    </form>
-    
-    <button mat-flat-button (click)="addColumn()" color="primary" class="button">
+  <div class="action-buttons">
+    <button class="custom-button" (click)="openAddColumnDialog()">
+      <span class="material-icons">add</span>
       <span>Ajout colonne</span>
     </button>
     
-    <button mat-flat-button color="primary" (click)="openReorderDialog()" class="button">
+    <button class="custom-button" (click)="openReorderDialog()">
+      <span class="material-icons">reorder</span>
       <span>Ordre colonnes</span>
     </button>
     
-    <button mat-flat-button color="primary" (click)="ExportTOExcel()" class="button">
+    <button class="custom-button" (click)="ExportTOExcel()">
+      <span class="material-icons">download</span>
       <span>Export</span>
     </button>
   </div>
@@ -28,7 +24,7 @@
     <table mat-table [dataSource]="transformedData" class="mat-elevation-z8">
       <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
         <th mat-header-cell *matHeaderCellDef (click)="openModaleEdit(column)">
-          {{column}}
+          {{getColumnDisplayName(column)}}
         </th>
         <td mat-cell *matCellDef="let element" [attr.data-is-group]="element.isGroup">
           <ng-container *ngIf="!isPricingColumn(column); else pricingCell">

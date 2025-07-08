@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:8069',
-  odooDb: 'your_odoo_db_name',
+  apiUrl: '', // Base path is handled by the proxy
+  odooDb: 'or.arpaone.fr' // IMPORTANT: Please verify this is your correct Odoo database name
 };
 
 /*

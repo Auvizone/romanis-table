@@ -23,6 +23,7 @@ export class LoginComponent {
         this.router.navigate(['/']); // Navigate to a protected route on success
       },
       error: (err) => {
+        console.error('Login failed in component:', err);
         this.error = err.message;
       }
     });

@@ -17,25 +17,30 @@ export class AuthService {
       jsonrpc: '2.0',
       method: 'call',
       params: {
-        db: environment.odooDb,
         login: params.login,
-        password: params.password,
-        context: {}
+        password: params.password
       }
     };
 
-    return this.http.post<any>(`${environment.apiUrl}/web/session/authenticate`, body, { headers, withCredentials: true }).pipe(
+    return this.http.post<any>(`${environment.apiUrl}/api/login`, body, { headers, withCredentials: true }).pipe(
       tap(response => {
-        if (response.result) {
+        console.log("🚀 ~ file: auth.service.ts:24 ~ response:", response)
+        // A successful response has a 'result' object that does NOT contain an 'error' key.
+        if (response && response.result && !response.result.error) {
           localStorage.setItem('user_is_logged_in', 'true');
-        } else if (response.error) {
+        } else {
+          // If there is an error, it might be in response.result.error or response.error
           localStorage.removeItem('user_is_logged_in');
-          throw new Error(response.error.data.message);
+          const serverError = response?.result?.error || response?.error?.data?.message || 'Login failed: Invalid response from server.';
+          throw new Error(serverError);
         }
       }),
       catchError(error => {
+        console.error('AuthService login error:', error); // Detailed log
         localStorage.removeItem('user_is_logged_in');
-        return throwError(() => new Error('Login failed. Please check your credentials and ensure the Odoo server is accessible.'));
+        // The error might be thrown from the tap operator or be an HttpErrorResponse
+        const errorMessage = error.message || error.error?.error || 'Login failed. Please check your credentials and ensure the Odoo server is accessible.';
+        return throwError(() => new Error(errorMessage));
       })
     );
   }

@@ -78,7 +78,8 @@
               "buildTarget": "romanis-table:build:production"
             },
             "development": {
-              "buildTarget": "romanis-table:build:development"
+              "buildTarget": "romanis-table:build:development",
+              "proxyConfig": "proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"

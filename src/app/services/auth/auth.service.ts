@@ -26,29 +26,38 @@ export class AuthService {
     // Clear any previous session data before attempting login
     this.clearSessionData();
     
-    const jsonRpcRequest = {
-      jsonrpc: '2.0',
-      method: 'call',
-      params: {
-        login: login,
-        password: password
-      },
-      id: new Date().getTime()
+    // Send parameters directly as expected by Odoo type='json' endpoint
+    const requestData = {
+      login: login,
+      password: password
     };
 
-    return this.http.post<any>(`${this.apiUrl}/api/login`, jsonRpcRequest, {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    });
+
+    console.log('Making login request to:', `${this.apiUrl}/api/login`);
+    console.log('Request data:', requestData);
+    console.log('Request headers:', headers);
+
+    return this.http.post<any>(`${this.apiUrl}/api/login`, requestData, {
+      headers: headers,
       withCredentials: true  // Ensure cookies are sent with request
     }).pipe(
       map(response => {
-        if (response.result && !response.result.error) {
-          this.setSecureSession(response.result);
+        // Check if response has error (Odoo returns error directly)
+        if (response.error) {
+          throw new Error(response.error);
+        }
+        
+        // Success response should have uid and message
+        if (response.uid) {
+          this.setSecureSession(response);
           this.authStatusSubject.next(true);
-          return response.result;
+          return response;
         } else {
-          const errorMsg = (response.result && response.result.error) 
-            ? response.result.error 
-            : 'Unknown login error occurred';
-          throw new Error(errorMsg);
+          throw new Error('Invalid response from server');
         }
       }),
       catchError(error => {

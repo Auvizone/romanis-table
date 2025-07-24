@@ -12,7 +12,7 @@ const routes: Routes = [
   {
     path: 'table',
     component: TableComponent,
-    canActivate: [authGuard],
+    // canActivate: [authGuard],
     data: {
       matrice: 1
     },

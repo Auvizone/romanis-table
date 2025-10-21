@@ -69,7 +69,7 @@ export class TableService {
   }
 
   public deletePrix(prix: Prix, matrice: string): Observable<Prix[]> {
-    return this.httpClient.delete<Prix[]>(`${environment.apiUrl}/api/delete_customer_pricing${matrice}/`, { body: prix })
+    return this.httpClient.post<Prix[]>(`${environment.apiUrl}/api/delete_customer_pricing${matrice}/`, { body: prix })
   }
 
 }

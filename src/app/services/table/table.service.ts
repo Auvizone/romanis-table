@@ -19,57 +19,57 @@ export class TableService {
   ) { }
 
   public readAllProducts(): Observable<Produits[]> {
-    return this.httpClient.get<Produits[]>(`${environment.apiUrl}/api/fetch_products/`)
+    return this.httpClient.get<Produits[]>(`${environment.apiUrl}/fetch_products/`)
   }
 
   public readAllDesignation(): Observable<Designation[]> {
-      return this.httpClient.get<Designation[]>(`${environment.apiUrl}/api/fetch_designation/`)
+      return this.httpClient.get<Designation[]>(`${environment.apiUrl}/fetch_designation/`)
   }
 
   public readAllClients(matrice: string): Observable<Clients[]> {
-    return this.httpClient.get<Clients[]>(`${environment.apiUrl}/api/fetch_clients${matrice}/`)
+    return this.httpClient.get<Clients[]>(`${environment.apiUrl}/fetch_clients${matrice}/`)
   }
 
   public readAllPricings(): Observable<Pricings[]> {
-    return this.httpClient.get<Pricings[]>(`${environment.apiUrl}/api/fetch_custom_pricing/`)
+    return this.httpClient.get<Pricings[]>(`${environment.apiUrl}/fetch_custom_pricing/`)
   }
 
   public createPricings(pricing: Pricings): Observable<Pricings[]> {
     console.log('pricing', pricing)
-    return this.httpClient.post<Pricings[]>(`${environment.apiUrl}/api/post_custom_pricing/`, pricing)
+    return this.httpClient.post<Pricings[]>(`${environment.apiUrl}/post_custom_pricing/`, pricing)
   }
 
   public createPricingsTwo(pricing: Pricings, matrice: string): Observable<Pricings[]> {
-    return this.httpClient.post<Pricings[]>(`${environment.apiUrl}/api/post_custom_pricing${matrice}/`, pricing)
+    return this.httpClient.post<Pricings[]>(`${environment.apiUrl}/post_custom_pricing${matrice}/`, pricing)
   }
 
   public updatePricings(pricing: Pricings, matrice: string): Observable<Pricings[]> {
-    return this.httpClient.patch<Pricings[]>(`${environment.apiUrl}/api/patch_custom_pricing${matrice}/`, pricing)
+    return this.httpClient.patch<Pricings[]>(`${environment.apiUrl}/patch_custom_pricing${matrice}/`, pricing)
   }
   
   public deletePricings(pricing: any, matrice: string): Observable<Pricings[]> {
-    return this.httpClient.post<Pricings[]>(`${environment.apiUrl}/api/delete_custom_pricing${matrice}/`, pricing)
+    return this.httpClient.post<Pricings[]>(`${environment.apiUrl}/delete_custom_pricing${matrice}/`, pricing)
   }
   
   public readAllPrix(matrice: string): Observable<Prix[]> {
-    return this.httpClient.get<Prix[]>(`${environment.apiUrl}/api/fetch_customer_pricing${matrice}/`)
+    return this.httpClient.get<Prix[]>(`${environment.apiUrl}/fetch_customer_pricing${matrice}/`)
   }
 
   public createPrix(prix: Prix, matrice: string): Observable<Prix[]> {
     console.log('matrice ICIIIII', matrice)
-    return this.httpClient.post<Prix[]>(`${environment.apiUrl}/api/post_customer_pricing${matrice}/`, prix)
+    return this.httpClient.post<Prix[]>(`${environment.apiUrl}/post_customer_pricing${matrice}/`, prix)
   }
 
   public updateColumnOrder(columnOrder: { name: string, position: number }[]): Observable<any> {
-    return this.httpClient.post(`${environment.apiUrl}/api/post_column_order/`, { columnOrder });
+    return this.httpClient.post(`${environment.apiUrl}/post_column_order/`, { columnOrder });
   }
 
   public updatePrix(prix: Prix, matrice: string): Observable<Prix[]> {
-    return this.httpClient.patch<Prix[]>(`${environment.apiUrl}/api/patch_customer_pricing${matrice}/`, prix)
+    return this.httpClient.patch<Prix[]>(`${environment.apiUrl}/patch_customer_pricing${matrice}/`, prix)
   }
 
   public deletePrix(prix: Prix, matrice: string): Observable<Prix[]> {
-    return this.httpClient.post<Prix[]>(`${environment.apiUrl}/api/delete_customer_pricing${matrice}/`, { body: prix })
+    return this.httpClient.post<Prix[]>(`${environment.apiUrl}/delete_customer_pricing${matrice}/`, { body: prix })
   }
 
 }

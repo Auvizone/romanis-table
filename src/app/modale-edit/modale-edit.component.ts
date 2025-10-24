@@ -72,7 +72,7 @@ export class ModaleEditComponent implements OnInit {
   deleteColumn() {
     const pricingDelete: any = {
       params: {
-        nom : this.data.id
+        id : this.data.id
       }
     }
     console.log("🚀 ~ ModaleEditComponent ~ deleteColumn ~ pricingDelete:", pricingDelete)

@@ -46,7 +46,7 @@ export class TableService {
   }
 
   public updatePricings(pricing: Pricings, matrice: string): Observable<Pricings[]> {
-    return this.httpClient.patch<Pricings[]>(`${environment.apiUrl}/patch_custom_pricing/`, pricing)
+    return this.httpClient.post<Pricings[]>(`${environment.apiUrl}/patch_custom_pricing/`, pricing)
   }
   
   public deletePricings(pricing: any, matrice: string): Observable<Pricings[]> {

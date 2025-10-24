@@ -8,7 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { TableComponent } from './table/table.component';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { credentialInterceptor } from './services/auth/credential.interceptor';
+// import { credentialInterceptor } from './services/auth/credential.interceptor';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon'
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -43,7 +43,8 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     DragDropModule,
     ScrollingModule,
   ],
-  providers: [provideHttpClient(withInterceptors([credentialInterceptor])), provideAnimationsAsync()],
+  // providers: [provideHttpClient(withInterceptors([credentialInterceptor])), provideAnimationsAsync()],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

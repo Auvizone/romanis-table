@@ -44,7 +44,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     ScrollingModule,
   ],
   // providers: [provideHttpClient(withInterceptors([credentialInterceptor])), provideAnimationsAsync()],
-  providers: [],
+  providers: [provideHttpClient(), provideAnimationsAsync()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

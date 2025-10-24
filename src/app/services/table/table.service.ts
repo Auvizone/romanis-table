@@ -8,6 +8,8 @@ import { Pricings } from 'src/app/Models/pricing.interface';
 import { Prix } from 'src/app/Models/prix.interface';
 import { Designation } from 'src/app/Models/designation.interface';
 
+/// SI JE VEUX ACCEDER AUX 2 MATRICES IL FAUT RAJOUTER ${matrice} mais pas config actuellement
+
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +29,7 @@ export class TableService {
   }
 
   public readAllClients(matrice: string): Observable<Clients[]> {
-    return this.httpClient.get<Clients[]>(`${environment.apiUrl}/fetch_clients${matrice}/`)
+    return this.httpClient.get<Clients[]>(`${environment.apiUrl}/fetch_clients/`)
   }
 
   public readAllPricings(): Observable<Pricings[]> {
@@ -40,24 +42,24 @@ export class TableService {
   }
 
   public createPricingsTwo(pricing: Pricings, matrice: string): Observable<Pricings[]> {
-    return this.httpClient.post<Pricings[]>(`${environment.apiUrl}/post_custom_pricing${matrice}/`, pricing)
+    return this.httpClient.post<Pricings[]>(`${environment.apiUrl}/post_custom_pricing/`, pricing)
   }
 
   public updatePricings(pricing: Pricings, matrice: string): Observable<Pricings[]> {
-    return this.httpClient.patch<Pricings[]>(`${environment.apiUrl}/patch_custom_pricing${matrice}/`, pricing)
+    return this.httpClient.patch<Pricings[]>(`${environment.apiUrl}/patch_custom_pricing/`, pricing)
   }
   
   public deletePricings(pricing: any, matrice: string): Observable<Pricings[]> {
-    return this.httpClient.post<Pricings[]>(`${environment.apiUrl}/delete_custom_pricing${matrice}/`, pricing)
+    return this.httpClient.post<Pricings[]>(`${environment.apiUrl}/delete_custom_pricing/`, pricing)
   }
   
   public readAllPrix(matrice: string): Observable<Prix[]> {
-    return this.httpClient.get<Prix[]>(`${environment.apiUrl}/fetch_customer_pricing${matrice}/`)
+    return this.httpClient.get<Prix[]>(`${environment.apiUrl}/fetch_customer_pricing/`)
   }
 
   public createPrix(prix: Prix, matrice: string): Observable<Prix[]> {
     console.log('matrice ICIIIII', matrice)
-    return this.httpClient.post<Prix[]>(`${environment.apiUrl}/post_customer_pricing${matrice}/`, prix)
+    return this.httpClient.post<Prix[]>(`${environment.apiUrl}/post_customer_pricing/`, prix)
   }
 
   public updateColumnOrder(columnOrder: { name: string, position: number }[]): Observable<any> {
@@ -65,11 +67,11 @@ export class TableService {
   }
 
   public updatePrix(prix: Prix, matrice: string): Observable<Prix[]> {
-    return this.httpClient.patch<Prix[]>(`${environment.apiUrl}/patch_customer_pricing${matrice}/`, prix)
+    return this.httpClient.patch<Prix[]>(`${environment.apiUrl}/patch_customer_pricing/`, prix)
   }
 
   public deletePrix(prix: Prix, matrice: string): Observable<Prix[]> {
-    return this.httpClient.post<Prix[]>(`${environment.apiUrl}/delete_customer_pricing${matrice}/`, { body: prix })
+    return this.httpClient.delete<Prix[]>(`${environment.apiUrl}/delete_customer_pricing/`, { body: prix })
   }
 
 }

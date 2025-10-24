@@ -5,18 +5,18 @@ import { LoginComponent } from './auth/login/login.component';
 // import { authGuard } from './services/auth/auth.guard';
 
 const routes: Routes = [
-  {
-    path: 'login',
-    component: LoginComponent
-  },
   // {
-  //   path: 'table',
-  //   component: TableComponent,
-  //   canActivate: [authGuard],
-  //   data: {
-  //     matrice: 1
-  //   },
+  //   path: 'login',
+  //   component: LoginComponent
   // },
+  {
+    path: 'table',
+    component: TableComponent,
+    // canActivate: [authGuard],
+    data: {
+      matrice: 1
+    },
+  },
   // {
   //   path: 'table2',
   //   component: TableComponent,
